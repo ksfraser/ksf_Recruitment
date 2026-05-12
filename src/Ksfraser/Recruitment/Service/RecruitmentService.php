@@ -15,7 +15,11 @@ class RecruitmentService
     public function createOpening(array $data): JobOpening
     {
         $opening = new JobOpening($data);
-        $this->openings[$opening->getId() ?? count($this->openings) + 1] = $opening;
+        if (!isset($data['id'])) {
+            $data['id'] = count($this->openings) + 1;
+            $opening = new JobOpening($data);
+        }
+        $this->openings[$opening->getId()] = $opening;
         return $opening;
     }
 
@@ -38,15 +42,14 @@ class RecruitmentService
     public function submitApplication(array $data): JobApplication
     {
         $app = new JobApplication();
-        if (isset($data['id'])) {
-            $app->setId($data['id']);
-        }
+        $id = $data['id'] ?? count($this->applications) + 1;
+        $app->setId($id);
         $app->setJobId($data['job_id'] ?? 0);
         $app->setApplicantId($data['applicant_id'] ?? 0);
         $app->setStatus(JobApplication::STATUS_SUBMITTED);
         $app->setAppliedAt(date('Y-m-d H:i:s'));
 
-        $this->applications[$app->getId() ?? count($this->applications) + 1] = $app;
+        $this->applications[$id] = $app;
         return $app;
     }
 

@@ -1,4 +1,4 @@
-# Use Case - MODULE_NAME
+# Test Plan - MODULE_NAME
 
 ## Document Information
 - **Module**: MODULE_NAME
@@ -8,15 +8,11 @@
 
 ---
 
-## 1. Use Cases
+## 1. Unit Tests
 
-### UC-MODULE-001: Primary Use Case
-
-**Actor**: User
-
-**Steps**:
-1. Action
-2. Result
+| Test ID | Description | Expected |
+|---------|-------------|----------|
+| MOD-001 | Basic test | Pass |
 
 ---
 
